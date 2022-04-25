@@ -1,0 +1,20 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.route = void 0;
+const express_1 = __importDefault(require("express"));
+const category_1 = require("../controllers/category");
+const articles_1 = require("../controllers/articles");
+const comment_1 = require("../controllers/comment");
+exports.route = express_1.default.Router();
+exports.route.get('/api/category', category_1.getCategory);
+exports.route.post('/api/category', category_1.postCategory);
+exports.route.put('/api/category/:id', category_1.updateCategory);
+exports.route.get('/api/article', articles_1.getArticle);
+exports.route.get('/api/article/:slug', articles_1.getSlugArticle);
+exports.route.post('/api/article', articles_1.postArticle);
+exports.route.put('/api/article/update/:id', articles_1.updateActicle);
+exports.route.get('/api/comment', comment_1.getComment);
+exports.route.post('/api/comment', comment_1.postComment);

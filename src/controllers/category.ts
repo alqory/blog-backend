@@ -61,3 +61,22 @@ export const updateCategory:asyncFunc = async ( req, res ) => {
         })
     }
 }
+
+export const deleteCategory:asyncFunc = async ( req, res ) => {
+    try {
+        await Category.destroy({
+            where : {
+                id : req.params.id
+            }
+        })
+
+        res.sendStatus(200)
+
+    } catch (error) {
+        if(error instanceof Error){
+            res.json({
+                message : error.message
+            })
+        }
+    }
+}
