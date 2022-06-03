@@ -16,4 +16,4 @@ exports.Category = db_configs_1.blogDB.define('category', {
 }, {
     timestamps: false
 });
-// Category.sync({ alter : true })
+exports.Category.sync({ alter: true });

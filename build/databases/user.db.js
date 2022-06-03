@@ -40,4 +40,4 @@ role_db_1.Role.hasMany(exports.User, {
     as: 'role'
 });
 exports.User.belongsTo(role_db_1.Role);
-// User.sync({ alter:true })
+exports.User.sync({ alter: true });

@@ -31,4 +31,4 @@ articles_db_1.Articles.hasMany(exports.Comments, {
     as: 'comment'
 });
 exports.Comments.belongsTo(articles_db_1.Articles);
-// Comments.sync({ alter:true })
+exports.Comments.sync({ alter: true });

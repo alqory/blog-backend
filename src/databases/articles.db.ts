@@ -45,4 +45,4 @@ Category.hasMany(Articles, {
 
 Articles.belongsTo(Category)
 
-// Articles.sync({ alter : true })
+Articles.sync({ alter : true })

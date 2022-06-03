@@ -16,4 +16,4 @@ exports.Role = db_configs_1.blogDB.define('role', {
 }, {
     timestamps: false
 });
-// Role.sync({ alter:true })
+exports.Role.sync({ alter: true });

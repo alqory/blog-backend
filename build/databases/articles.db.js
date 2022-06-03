@@ -44,4 +44,4 @@ category_db_1.Category.hasMany(exports.Articles, {
     as: 'categoryId'
 });
 exports.Articles.belongsTo(category_db_1.Category);
-// Articles.sync({ alter : true })
+exports.Articles.sync({ alter: true });

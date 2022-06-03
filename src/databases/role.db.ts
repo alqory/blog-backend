@@ -15,4 +15,4 @@ export const Role = blogDB.define('role', {
     timestamps : false
 })
 
-// Role.sync({ alter:true })
+Role.sync({ alter:true })
