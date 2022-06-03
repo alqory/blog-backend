@@ -167,7 +167,7 @@ export const Login = async ( req:Request, res:Response ) => {
         })
 
         // Set cookie from client
-        res.json({ accessToken })
+        res.json({ accessToken, refreshToken })
 
     } catch (error) {
         if(error instanceof Error){
