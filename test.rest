@@ -1,1 +1,1 @@
-GET http://localhost:8080/api/category
+GET http://localhost:8080/api/article?page=1
