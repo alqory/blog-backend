@@ -13,8 +13,19 @@ export const Articles = blogDB.define('article', {
         type : DataTypes.STRING({ length : 100 }),
         allowNull : false
     },
-    body : {
+    title2 : {
         type : DataTypes.TEXT,
+        allowNull : false
+    },
+    source : {
+        type : DataTypes.TEXT,
+        allowNull : true
+    },
+    content : {
+        type : DataTypes.TEXT,
+    },
+    images : {
+        type : DataTypes.STRING
     },
     slug : {
         type : DataTypes.STRING
@@ -33,4 +44,4 @@ Category.hasMany(Articles, {
 })
 
 Articles.belongsTo(Category)
-Articles.sync({ alter : true })
+// Articles.sync({ alter : true })

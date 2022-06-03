@@ -5,7 +5,7 @@ config();
 const define = process.env
 
 export const blogDB = new Sequelize( 
-   process.env.NODE_ENV ? '' : 
+   process.env.NODE_ENV === 'production' ? `${process.env.DATABASE_URI}` : 
    `postgres://${define.DB_USERNAME}:${define.DB_PASSWORD}@${define.DB_HOST}:${define.DB_PORT}/${define.DB_NAME}`
  )
 

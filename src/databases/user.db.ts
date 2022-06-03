@@ -1,24 +1,44 @@
 import { blogDB } from "../configs/db.configs";
-import { DataTypes } from "sequelize/types";
+import { Role } from "./role.db";
+import { DataTypes } from "sequelize";
 
 export const User = blogDB.define('user', {
     id : {
-        type : DataTypes.UUID,
+        type : DataTypes.INTEGER,
         primaryKey : true,
         autoIncrement : true
     },
-    firstname : {
-        type : DataTypes.STRING({ length:20 }),
+    email : {
+        type : DataTypes.STRING({ length:50 }),
         allowNull: false
     },
-    lastname : {
+    username : {
         type : DataTypes.STRING({ length:20 }),
-        allowNull: true
     },
     password : {
-        type : DataTypes.STRING({ length:30 }),
+        type : DataTypes.TEXT,
         allowNull: false
+    },
+    refreshToken : {
+        type : DataTypes.TEXT
+    },
+    lastActive : {
+        type : DataTypes.TEXT,
+        allowNull : true
+    },
+    createAt : {
+        type : DataTypes.TEXT,
+        allowNull : false
     }
+}, {
+    timestamps : false
 })
 
-User.sync({ alter:true })
+Role.hasMany(User, {
+    foreignKey : "roleId",
+    as : 'role'
+})
+
+User.belongsTo(Role)
+
+// User.sync({ alter:true })

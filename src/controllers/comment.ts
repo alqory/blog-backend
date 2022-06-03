@@ -13,22 +13,34 @@ type reqParams = {
 }
 
 type asyncFunc = (
-    req: Request<reqParams, {}, reqBody, {}>,
+    req: Request<reqParams, {}, reqBody, {
+        api_key : string
+    }>,
     res: Response
-  ) => Promise<void>;
+  ) => void;
 
 export const getComment:asyncFunc = async ( req, res ) => {
-    try {
-        const data = await Comments.findAll()
-        res.status(200).send(data)
+    
+    const { api_key } = req.query
 
-    } catch (error) {
-        if(error instanceof Error){
-            res.json({
-                message : error.message
-            })
+    if(api_key !== process.env.API_KEY) {
+
+        try {
+            const data = await Comments.findAll()
+            res.status(200).send(data)
+    
+        } catch (error) {
+            if(error instanceof Error){
+                res.json({
+                    message : error.message
+                })
+            }
         }
+    }else {
+        res.sendStatus(403)
     }
+
+
 }
 
 export const postComment:asyncFunc = async ( req, res ) => {

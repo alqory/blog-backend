@@ -1,6 +1,5 @@
 import { blogDB } from "../configs/db.configs";
-import { User } from "./user.db";
-import { DataTypes } from "sequelize/types";
+import { DataTypes } from "sequelize";
 
 export const Role = blogDB.define('role', {
     id : {
@@ -16,9 +15,4 @@ export const Role = blogDB.define('role', {
     timestamps : false
 })
 
-Role.hasMany(User, {
-    foreignKey : "userId",
-    as : "role"
-})
-
-Role.sync({ alter:true })
+// Role.sync({ alter:true })

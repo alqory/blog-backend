@@ -7,7 +7,9 @@ import { Comments } from "../databases/comment.db";
 
 type reqBody = {
   title: string;
-  body: string;
+  title2 : string;
+  content: string;
+  source? : string;
   categoryId: number;
 };
 
@@ -26,10 +28,35 @@ type asyncFunc = (
   res: Response
 ) => Promise<void>;
 
+export const getArticleAdmin:asyncFunc = async (req, res) => {
+   
+    try {
+      const request = await Articles.findAll({
+        attributes: ["id", "title", "title2", "content", "images" ,"slug", "createTime"],
+        include : [
+          {
+            model : Comments,
+            attributes : ["name", "text", "postTime"],
+            as : 'comment'
+          }
+        ]
+      })
+
+      res.status(200).send(request)
+
+    } catch (error) {
+       if(error instanceof Error) {
+         res.json({
+           message : error.message
+         })
+       }
+    }
+}
+
 export const getArticle: asyncFunc = async (req, res) => {
   const { category, page } = req.query;
 
-  const limit      = 5
+  const limit      = 3
   const startIndex = ( page - 1 ) * limit
   const endIndex   = page * limit
 
@@ -37,7 +64,7 @@ export const getArticle: asyncFunc = async (req, res) => {
 
     if (category && page) {
       const data = await Articles.findAll({
-        attributes: ["id", "title", "body", "slug", "createTime"],
+        attributes: ["id", "title", "title2", "content", "source", "images" ,"slug", "createTime"],
         include: [
           {
             model: Category,
@@ -61,7 +88,7 @@ export const getArticle: asyncFunc = async (req, res) => {
     } else {
 
       const data = await Articles.findAll({
-        attributes: ["id", "title", "body", "slug", "createTime"],
+        attributes: ["id", "title", "title2", "content", "source", "images" ,"slug", "createTime"],
         include: [
           {
             model: Category,
@@ -92,11 +119,16 @@ export const getSlugArticle: asyncFunc = async (req, res) => {
   const { slug } = req.params;
   try {
     const data = await Articles.findOne({
-      attributes: ["id", "title", "body", "slug", "createTime"],
+      attributes: ["id", "title", "title2", "content", "source","images" ,"slug", "createTime"],
       include: [
         {
           model: Category,
           as: "category",
+        },
+        {
+          model : Comments,
+          attributes : ["name", "text", "postTime"],
+          as : 'comment'
         }
       ],
       where: {
@@ -115,21 +147,27 @@ export const getSlugArticle: asyncFunc = async (req, res) => {
 };
 
 export const postArticle: asyncFunc = async (req, res) => {
-  const { title, body, categoryId } = req.body;
+  const { title, title2, content, source ,categoryId } = req.body;
   const slugify: string = slug(title);
   const timestamps: string = moment().format("ll");
+  const image = req.file?.path
 
   try {
     await Articles.create({
-      title: title,
-      body: body,
-      slug: slugify,
-      createTime: timestamps,
-      categoryId: categoryId,
-    });
+      title  : title,
+      title2 : title2,
+      content : content,
+      source : source,
+      images : image,
+      slug : slugify,
+      createTime : timestamps,
+      categoryId : categoryId,
+    })
+
     res.status(200).json({
       message: "success create new post!",
     });
+
   } catch (error) {
     if (error instanceof Error) {
       res.json({
@@ -141,14 +179,19 @@ export const postArticle: asyncFunc = async (req, res) => {
 
 export const updateActicle:asyncFunc = async ( req, res ) => {
   const { id } = req.params
-  const { title, body } = req.body;
+  const { title, title2 ,content, source, categoryId } = req.body;
   const slugify: string = slug(title);
+  const image = req.file?.path
 
   try {
     await Articles.update({
-      title : title,
-      body : body,
-      slug : slugify
+      title  : title,
+      title2 : title2,
+      content   : content,
+      source : source,
+      images : image,
+      categoryId : categoryId,
+      slug   : slugify
     },{
       where : { id : id  }
     })

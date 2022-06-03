@@ -7,14 +7,25 @@ type asyncFunc = (
     res:Response
     ) => Promise<void>
 
+export const getCategoryAdmin:asyncFunc = async( req, res ) => {
+    try {
+        const data = await Category.findAll()
+
+        res.status(200).send(data)
+
+    } catch (error) {
+        res.status(404).send({
+            message : error,
+            data    : []
+        })
+    }
+}
+
 export const getCategory:asyncFunc = async( req, res ) => {
     try {
         const data = await Category.findAll()
 
-        res.status(200).send({
-            message : 'oke',
-            data    : data
-        })
+        res.status(200).send(data)
 
     } catch (error) {
         res.status(404).send({
