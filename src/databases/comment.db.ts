@@ -32,4 +32,4 @@ Articles.hasMany(Comments, {
 })
 Comments.belongsTo(Articles)
 
-// Comments.sync({ alter:true })
+Comments.sync({ alter:true })
