@@ -1,1 +1,1 @@
-web:node  /app/src/_app.ts
+web:node  /app/build/_app.js
