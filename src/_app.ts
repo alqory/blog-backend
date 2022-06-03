@@ -47,7 +47,7 @@ function main():void {
 
 
     app.use(cors({
-        origin : 'http://localhost:3000',
+        origin : 'https://tricky.netlify.app',
         credentials : true,
     }))
 

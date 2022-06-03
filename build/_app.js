@@ -37,7 +37,7 @@ function main() {
     app.use(express_1.default.json());
     // app.use(morgan('dev'))
     app.use((0, cors_1.default)({
-        origin: 'http://localhost:3000',
+        origin: 'https://tricky.netlify.app',
         credentials: true,
     }));
     app.use((0, helmet_1.default)({

@@ -14,8 +14,18 @@ const sequelize_1 = require("sequelize");
 const dotenv_1 = require("dotenv");
 (0, dotenv_1.config)();
 const define = process.env;
-exports.blogDB = new sequelize_1.Sequelize(process.env.NODE_ENV === 'production' ? `${process.env.DATABASE_URI}` :
-    `postgres://${define.DB_USERNAME}:${define.DB_PASSWORD}@${define.DB_HOST}:${define.DB_PORT}/${define.DB_NAME}`, {
+// export const blogDB = new Sequelize( 
+//    process.env.NODE_ENV === 'production' ? `${process.env.DATABASE_URI}` : 
+//    `postgres://${define.DB_USERNAME}:${define.DB_PASSWORD}@${define.DB_HOST}:${define.DB_PORT}/${define.DB_NAME}`
+//  ,{
+//      dialectOptions : {
+//         ssl :  {
+//                 require: true,
+//                 rejectUnauthorized: false
+//             }
+//      }
+//  })
+exports.blogDB = new sequelize_1.Sequelize(`${process.env.DATABASE_URI}`, {
     dialectOptions: {
         ssl: {
             require: true,
