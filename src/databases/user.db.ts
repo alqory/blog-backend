@@ -41,4 +41,4 @@ Role.hasMany(User, {
 
 User.belongsTo(Role)
 
-User.sync({ alter:true })
+// User.sync({ alter:true })
