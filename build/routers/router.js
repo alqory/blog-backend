@@ -33,7 +33,7 @@ exports.route.post('/api/comment', verifyComment_1.verifyComment, comment_1.post
 exports.route.delete('/api/comment/delete/:id', comment_1.deleteCommentById);
 // Role
 exports.route.get('/api/role', roles_1.getRole);
-exports.route.post('/api/role', verify_1.verifyToken, roles_1.createRole);
+exports.route.post('/api/role', roles_1.createRole);
 // User
 exports.route.get('/api/users', verify_1.verifyToken, users_1.getUser);
 exports.route.post('/api/register', users_1.createUser);

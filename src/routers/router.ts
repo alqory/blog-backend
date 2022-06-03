@@ -64,7 +64,7 @@ route.delete('/api/comment/delete/:id', deleteCommentById)
 
 // Role
 route.get('/api/role', getRole)
-route.post('/api/role', verifyToken ,createRole)
+route.post('/api/role',createRole)
 
 // User
 route.get('/api/users', verifyToken, getUser)
