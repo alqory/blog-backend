@@ -17,7 +17,7 @@ const define = process.env;
 // Development
 // export const blogDB = new Sequelize(`postgres://${define.DB_USERNAME}:${define.DB_PASSWORD}@${define.DB_HOST}:${define.DB_PORT}/${define.DB_NAME}`)
 // 
-exports.blogDB = new sequelize_1.Sequelize(`${define.DATABASE_URL}`, {
+exports.blogDB = new sequelize_1.Sequelize(`${define.DATABASE_URI}`, {
     dialectOptions: {
         ssl: {
             require: true,
