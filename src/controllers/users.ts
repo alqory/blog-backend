@@ -156,8 +156,8 @@ export const Login = async ( req:Request, res:Response ) => {
 
         res.cookie('refreshToken', refreshToken, {
             httpOnly : true,
-            maxAge : 24 * 60 * 60 * 1000,
-            secure : true
+            secure : true,
+            maxAge : 24 * 60 * 60 * 1000
         })
 
         await User.update({ refreshToken : refreshToken }, {
@@ -167,7 +167,7 @@ export const Login = async ( req:Request, res:Response ) => {
         })
 
         // Set cookie from client
-        res.json({ accessToken, refreshToken })
+        res.json({ accessToken })
 
     } catch (error) {
         if(error instanceof Error){

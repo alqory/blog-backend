@@ -48,7 +48,7 @@ function main():void {
 
     app.use(cors({
         origin : 'https://tricky.netlify.app',
-        credentials : true,
+        credentials : true
     }))
 
     app.use(helmet({

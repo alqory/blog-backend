@@ -17,9 +17,6 @@ export const verifyToken:middlewareFunc = ( req, res, next ) => {
       // @ts-ignore
         if(err || decode.roleId !== 1 ) return res.sendStatus(403)
 
-        // @ts-ignore
-        req.email = decode.email
-
         next()
    })
 }

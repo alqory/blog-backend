@@ -12,7 +12,7 @@ export const blogDB = new Sequelize(`${define.DATABASE_URI}`,{
     dialectOptions : {
         ssl : {
             require: true,
-            rejectUnauthorized : false
+            rejectUnauthorized : true
         }
     }
 })
