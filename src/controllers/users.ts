@@ -5,6 +5,7 @@ import { Role } from "../databases/role.db";
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import { config } from 'dotenv'
+config();
 
 type reqBody = {
     email? : string
@@ -21,7 +22,7 @@ type reqParams = {
 type asyncFunc =
  ( req:Request<reqParams,{},reqBody,{}>, res:Response) => Promise<void>
 
-config();
+
 
 export const getUser:asyncFunc = async(req, res) => {
     try {
