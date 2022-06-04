@@ -135,6 +135,7 @@ const Login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         });
         res.cookie('refreshToken', refreshToken, {
             httpOnly: true,
+            sameSite: true,
             secure: true,
             maxAge: 24 * 60 * 60 * 1000
         });
