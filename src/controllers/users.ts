@@ -1,6 +1,5 @@
 import { User } from "../databases/user.db";
 import { Request, Response } from "express";
-import { Model } from 'sequelize'
 import moment from 'moment'
 import { Role } from "../databases/role.db";
 import bcrypt from 'bcrypt'

@@ -21,10 +21,6 @@ type asyncFunc = (
 
 export const getComment:asyncFunc = async ( req, res ) => {
     
-    const { api_key } = req.query
-
-    if(api_key !== process.env.API_KEY) {
-
         try {
             const data = await Comments.findAll()
             res.status(200).send(data)
@@ -36,9 +32,6 @@ export const getComment:asyncFunc = async ( req, res ) => {
                 })
             }
         }
-    }else {
-        res.sendStatus(403)
-    }
 
 
 }

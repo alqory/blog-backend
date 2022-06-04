@@ -1,5 +1,5 @@
 import express ,{ Express } from "express";
-import morgan from "morgan";
+// import morgan from "morgan";
 import multer from 'multer'
 import cors from 'cors'
 import helmet from "helmet";
@@ -46,8 +46,10 @@ function main():void {
     // app.use(morgan('dev'))
 
 
+    const Origin:string[] = ["https://tricky.netlify.app","http://localhost:3000"]
+
     app.use(cors({
-        origin : 'https://tricky.netlify.app',
+        origin : Origin[0],
         credentials : true
     }))
 
@@ -71,7 +73,14 @@ function main():void {
 
     app.use(route)
 
-    app.get('/limit', (req, res) => {
+    app.get('/', (req, res) => {
+
+        res.cookie("testToken", "73hf[;'d38udh7d9qwdhoqhdbOIUQHD", {
+            httpOnly : true,
+            secure :true,
+            sameSite : true,
+            maxAge : 24 * 60 * 60 * 10000
+        })
         res.json({
             message : "Hello"
         })

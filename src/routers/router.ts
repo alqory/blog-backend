@@ -58,7 +58,7 @@ route.put('/api/article/update/:id', verifyToken, updateActicle)
 route.delete('/api/article/delete/:id', verifyToken, deleteArticle)
 
 // Comment
-route.get('/api/comment',getComment)
+route.get('/api/comment', getComment)
 route.post('/api/comment', verifyComment ,postComment)
 route.delete('/api/comment/delete/:id', deleteCommentById)
 
