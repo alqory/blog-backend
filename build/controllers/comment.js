@@ -16,22 +16,16 @@ exports.deleteCommentById = exports.postComment = exports.getComment = void 0;
 const comment_db_1 = require("../databases/comment.db");
 const moment_1 = __importDefault(require("moment"));
 const getComment = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { api_key } = req.query;
-    if (api_key !== process.env.API_KEY) {
-        try {
-            const data = yield comment_db_1.Comments.findAll();
-            res.status(200).send(data);
-        }
-        catch (error) {
-            if (error instanceof Error) {
-                res.json({
-                    message: error.message
-                });
-            }
-        }
+    try {
+        const data = yield comment_db_1.Comments.findAll();
+        res.status(200).send(data);
     }
-    else {
-        res.sendStatus(403);
+    catch (error) {
+        if (error instanceof Error) {
+            res.json({
+                message: error.message
+            });
+        }
     }
 });
 exports.getComment = getComment;

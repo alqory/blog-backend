@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+// import morgan from "morgan";
 const multer_1 = __importDefault(require("multer"));
 const cors_1 = __importDefault(require("cors"));
 const helmet_1 = __importDefault(require("helmet"));
@@ -36,9 +37,10 @@ function main() {
     (0, db_configs_1.dbAuthenticate)();
     app.use(express_1.default.json());
     // app.use(morgan('dev'))
+    const Origin = ["https://tricky.netlify.app", "http://localhost:3000"];
     app.use((0, cors_1.default)({
-        origin: 'https://tricky.netlify.app',
-        credentials: true,
+        origin: Origin[0],
+        credentials: true
     }));
     app.use((0, helmet_1.default)({
         crossOriginResourcePolicy: false,
@@ -54,7 +56,13 @@ function main() {
     }).single('images'));
     app.use('/images', express_1.default.static('images'));
     app.use(router_1.route);
-    app.get('/limit', (req, res) => {
+    app.get('/', (req, res) => {
+        res.cookie("testToken", "73hf[;'d38udh7d9qwdhoqhdbOIUQHD", {
+            httpOnly: true,
+            secure: true,
+            sameSite: true,
+            maxAge: 24 * 60 * 60 * 10000
+        });
         res.json({
             message: "Hello"
         });
