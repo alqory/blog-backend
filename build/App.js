@@ -34,6 +34,7 @@ const fileFilter = (req, file, cb) => {
 };
 function main() {
     app.use((0, cookie_parser_1.default)());
+    app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal']);
     (0, db_configs_1.dbAuthenticate)();
     app.use(express_1.default.json());
     // app.use(morgan('dev'))
@@ -56,17 +57,7 @@ function main() {
     }).single('images'));
     app.use('/images', express_1.default.static('images'));
     app.use(router_1.route);
-    app.get('/', (req, res) => {
-        res.cookie("testToken", "73hf[;'d38udh7d9qwdhoqhdbOIUQHD", {
-            httpOnly: true,
-            secure: true,
-            sameSite: true,
-            maxAge: 24 * 60 * 60 * 10000
-        });
-        res.json({
-            message: "Hello"
-        });
-    });
+    console.log(process.env.NODE_ENV);
     app.listen(PORT, () => console.log(`server is running on http://localhost:${PORT}`));
 }
 main();

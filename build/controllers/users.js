@@ -18,6 +18,8 @@ const moment_1 = __importDefault(require("moment"));
 const role_db_1 = require("../databases/role.db");
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+const dotenv_1 = require("dotenv");
+(0, dotenv_1.config)();
 const getUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const data = yield user_db_1.User.findAll({
@@ -135,9 +137,10 @@ const Login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         });
         res.cookie('refreshToken', refreshToken, {
             httpOnly: true,
-            sameSite: true,
-            secure: true,
-            maxAge: 24 * 60 * 60 * 1000
+            sameSite: "strict",
+            secure: process.env.NODE_ENV == 'production',
+            maxAge: 24 * 60 * 60 * 1000,
+            signed: true
         });
         yield user_db_1.User.update({ refreshToken: refreshToken }, {
             where: {

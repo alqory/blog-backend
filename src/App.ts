@@ -38,6 +38,7 @@ const fileFilter = (req:Express.Request, file:Express.Multer.File, cb: multer.Fi
 function main():void {
     
     app.use(cookieParser())
+    app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal'])
 
     dbAuthenticate();
 
@@ -73,18 +74,7 @@ function main():void {
 
     app.use(route)
 
-    app.get('/', (req, res) => {
-
-        res.cookie("testToken", "73hf[;'d38udh7d9qwdhoqhdbOIUQHD", {
-            httpOnly : true,
-            secure :true,
-            sameSite : true,
-            maxAge : 24 * 60 * 60 * 10000
-        })
-        res.json({
-            message : "Hello"
-        })
-    })
+    console.log(process.env.NODE_ENV)
     
     app.listen(PORT, () => console.log(`server is running on http://localhost:${PORT}`))
 }

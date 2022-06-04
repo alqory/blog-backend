@@ -4,6 +4,7 @@ import moment from 'moment'
 import { Role } from "../databases/role.db";
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
+import { config } from 'dotenv'
 
 type reqBody = {
     email? : string
@@ -19,6 +20,8 @@ type reqParams = {
 
 type asyncFunc =
  ( req:Request<reqParams,{},reqBody,{}>, res:Response) => Promise<void>
+
+config();
 
 export const getUser:asyncFunc = async(req, res) => {
     try {
@@ -155,9 +158,10 @@ export const Login = async ( req:Request, res:Response ) => {
 
         res.cookie('refreshToken', refreshToken, {
             httpOnly : true,
-            sameSite : true,
-            secure : true,
-            maxAge : 24 * 60 * 60 * 1000
+            sameSite : "strict",
+            secure : process.env.NODE_ENV == 'production',
+            maxAge : 24 * 60 * 60 * 1000,
+            signed : true
         })
 
         await User.update({ refreshToken : refreshToken }, {
