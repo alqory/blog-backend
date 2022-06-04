@@ -8,7 +8,7 @@ export const refreshToken = async(req:Request, res:Response) => {
         const refreshToken = req.cookies.refreshToken
     
         
-        if(!refreshToken) return res.sendStatus(401);
+        if(!refreshToken) return;
 
         const User:any = await Users.findAll({
             where : {

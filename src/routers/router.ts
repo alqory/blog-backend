@@ -63,13 +63,13 @@ route.post('/api/comment', verifyComment ,postComment)
 route.delete('/api/comment/delete/:id', deleteCommentById)
 
 // Role
-route.get('/api/role', getRole)
-route.post('/api/role',createRole)
+route.get('/api/role', verifyToken, getRole)
+route.post('/api/role',verifyToken ,createRole)
 
 // User
-route.get('/api/users', getUser)
+route.get('/api/users', verifyToken ,getUser)
 route.post('/api/register', createUser)
-route.put('/api/users/update/:id', updateUser)
+route.put('/api/users/update/:id', verifyToken, updateUser)
 route.delete('/api/users/delete/:id', verifyToken, deleteUser)
 
 // Login
