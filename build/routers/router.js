@@ -35,7 +35,7 @@ exports.route.delete('/api/comment/delete/:id', comment_1.deleteCommentById);
 exports.route.get('/api/role', roles_1.getRole);
 exports.route.post('/api/role', roles_1.createRole);
 // User
-exports.route.get('/api/users', verify_1.verifyToken, users_1.getUser);
+exports.route.get('/api/users', users_1.getUser);
 exports.route.post('/api/register', users_1.createUser);
 exports.route.put('/api/users/update/:id', users_1.updateUser);
 exports.route.delete('/api/users/delete/:id', verify_1.verifyToken, users_1.deleteUser);

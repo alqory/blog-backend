@@ -34,12 +34,13 @@ const fileFilter = (req, file, cb) => {
 };
 function main() {
     app.use((0, cookie_parser_1.default)());
+    app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal']);
     (0, db_configs_1.dbAuthenticate)();
     app.use(express_1.default.json());
     // app.use(morgan('dev'))
     const Origin = ["https://tricky.netlify.app", "http://localhost:3000"];
     app.use((0, cors_1.default)({
-        origin: Origin[0],
+        origin: Origin[1],
         credentials: true
     }));
     app.use((0, helmet_1.default)({

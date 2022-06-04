@@ -8,7 +8,7 @@ import { config } from 'dotenv'
 config();
 
 type reqBody = {
-    email? : string
+    email : string
     username? : string
     password : string
     lastActive? : string;
@@ -128,6 +128,7 @@ export const deleteUser:asyncFunc = async(req, res) => {
 
 // @ts-ignore
 export const Login = async ( req:Request, res:Response ) => {
+    console.log(req.body.email)
 
 
     try {
@@ -162,7 +163,7 @@ export const Login = async ( req:Request, res:Response ) => {
             sameSite : "strict",
             secure : process.env.NODE_ENV == 'production',
             maxAge : 24 * 60 * 60 * 1000,
-            signed : true
+            // signed : true
         })
 
         await User.update({ refreshToken : refreshToken }, {

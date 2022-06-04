@@ -115,6 +115,7 @@ const deleteUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
 exports.deleteUser = deleteUser;
 // @ts-ignore
 const Login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log(req.body.email);
     try {
         const findUser = yield user_db_1.User.findAll({
             where: {
@@ -140,7 +141,7 @@ const Login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             sameSite: "strict",
             secure: process.env.NODE_ENV == 'production',
             maxAge: 24 * 60 * 60 * 1000,
-            signed: true
+            // signed : true
         });
         yield user_db_1.User.update({ refreshToken: refreshToken }, {
             where: {

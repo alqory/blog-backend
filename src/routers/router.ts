@@ -67,7 +67,7 @@ route.get('/api/role', getRole)
 route.post('/api/role',createRole)
 
 // User
-route.get('/api/users', verifyToken, getUser)
+route.get('/api/users', getUser)
 route.post('/api/register', createUser)
 route.put('/api/users/update/:id', updateUser)
 route.delete('/api/users/delete/:id', verifyToken, deleteUser)

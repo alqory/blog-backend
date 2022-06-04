@@ -38,10 +38,12 @@ const fileFilter = (req:Express.Request, file:Express.Multer.File, cb: multer.Fi
 function main():void {
     
     app.use(cookieParser())
+    app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal'])
 
     dbAuthenticate();
 
     app.use(express.json())
+    
 
     // app.use(morgan('dev'))
 
@@ -49,7 +51,7 @@ function main():void {
     const Origin:string[] = ["https://tricky.netlify.app","http://localhost:3000"]
 
     app.use(cors({
-        origin : Origin[0],
+        origin : Origin[1],
         credentials : true
     }))
 
