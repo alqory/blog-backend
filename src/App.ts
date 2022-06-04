@@ -51,7 +51,7 @@ function main():void {
     const Origin:string[] = ["https://tricky.netlify.app","http://localhost:3000"]
 
     app.use(cors({
-        origin : Origin[1],
+        origin : Origin[0],
         credentials : true
     }))
 

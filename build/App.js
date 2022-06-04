@@ -40,7 +40,7 @@ function main() {
     // app.use(morgan('dev'))
     const Origin = ["https://tricky.netlify.app", "http://localhost:3000"];
     app.use((0, cors_1.default)({
-        origin: Origin[1],
+        origin: Origin[0],
         credentials: true
     }));
     app.use((0, helmet_1.default)({
