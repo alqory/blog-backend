@@ -38,7 +38,7 @@ const fileFilter = (req:Express.Request, file:Express.Multer.File, cb: multer.Fi
 function main():void {
     
     app.use(cookieParser())
-    app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal'])
+    app.set('trust proxy', 1)
 
     dbAuthenticate();
 

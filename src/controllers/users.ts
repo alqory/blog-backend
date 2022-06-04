@@ -160,7 +160,7 @@ export const Login = async ( req:Request, res:Response ) => {
 
         res.cookie('refreshToken', refreshToken, {
             httpOnly : true,
-            sameSite : "strict",
+            sameSite : "none",
             secure : process.env.NODE_ENV == 'production',
             maxAge : 24 * 60 * 60 * 1000,
             // signed : true
